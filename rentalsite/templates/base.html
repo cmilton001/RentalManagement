@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Django{% endblock title %}</title>
+</head>
+<body>
+    <div>
+        <table width="100%">
+            <tr>
+                <td colspan="75%"><a href="{% url 'productapp:productlist' %}"> HOME </a></td>
+                <td colspan="25%">
+                    {% if user.is_authenticated %}
+                        <p><a href="{% url 'logout' %}">Log Out</a></p>
+                    {% else %}
+                        <p><a href="{% url 'login' %}">Log In</a></p>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+</body>
+</html>
