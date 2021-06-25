@@ -5,23 +5,27 @@ from typing import Any
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from git import objects
 
-# Create your views here.
+from rentalsite import models
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
 from django.contrib.auth import authenticate as auth
 
+from rentalsite.models import Equipment
 
-# from rentalsite.models import Category
+myModels = [models.Equipment, models.Page, models.Vendor, models.Job, models.OrderMaster, models.InvoiceDetails,
+            models.ReturnSlip]
+
+
 def index(request):
     return render(request, 'base.html')
 
 
 def login(request):
     if request.user.is_authenticated:
-        return redirect('list_modules_class_view.html')
+        return HttpResponseRedirect(reverse('rentalsite:listpages'))
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -35,15 +39,15 @@ def login(request):
     return render(request, 'base.html')
 
 
-'''
 # class based views
 
 class ListModules(ListView):  # generic view
-    template_name = 'rentalmanagement/list_modules_class_view.html'
-    model = Category
+    template_name = 'rentalsite/list_modules_class_view.html'
+    model = Equipment
     context_object_name = 'modules'
 
 
+'''
 class ProductDetail(DetailView):
     model = Product
     template_name = 'productapp/product_detail_class_view.html'
