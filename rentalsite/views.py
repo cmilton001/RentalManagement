@@ -11,7 +11,6 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-
 from django.contrib.auth import authenticate as auth
 
 from rentalsite.models import Category
@@ -40,3 +39,29 @@ class ListModules(ListView):  # generic view
     model = Category
     context_object_name = 'modules'
 
+
+class ProductDetail(DetailView):
+    model = Product
+    template_name = 'productapp/product_detail_class_view.html'
+    context_object_name = 'product'
+
+
+class ProductCreate(CreateView):
+    model = Product
+    fields = ['name', 'price', 'quantity', 'description', 'category']
+    template_name = 'productapp/product_new.html'
+    success_url = reverse_lazy('productapp:productlist')
+
+
+class ProductUpdate(UpdateView):
+    model = Product
+    fields = ['name', 'price', 'quantity', 'description', 'category']
+    template_name = 'productapp/product_update.html'
+    success_url = reverse_lazy('productapp:productlist')
+
+
+class ProductDelete(DeleteView):
+    template_name = 'productapp/product_delete_confirmation.html'
+    model = Product
+    context_object_name = 'products'
+    success_url = reverse_lazy('productapp:productlist')
