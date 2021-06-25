@@ -7,7 +7,7 @@ app_name = 'rentalmanagement'
 urlpatterns = [
 
 #class based views urls
-    #path('listpages/', views.ListPages.as_view(), name='listpages'),
+    path('listpages/', views.login, name='listpages'),
     path('login/', views.index, name='login'),
     #path('productdetail/<int:pk>/', views.ProductDetail.as_view(), name='productdetail'),
     #path('productnew/', views.ProductCreate.as_view(), name='productnew'),

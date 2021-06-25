@@ -19,10 +19,9 @@ def index(request):
     return render(request, 'base.html')
 
 
-''''
 def login(request):
     if request.user.is_authenticated:
-        return redirect('base.html')
+        return redirect('list_modules_class_view.html')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -30,12 +29,13 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('base.html')
+            return redirect('list_modules_class_view.html')
         else:
             print('Invalid login credentials')
-    return render(request, 'login.html')
+    return render(request, 'base.html')
 
 
+'''
 # class based views
 
 class ListModules(ListView):  # generic view
