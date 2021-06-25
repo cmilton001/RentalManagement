@@ -13,11 +13,15 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from django.contrib.auth import authenticate as auth
 
-from rentalsite.models import Category
+
+# from rentalsite.models import Category
+def index(request):
+    return render(request, 'base.html')
 
 
+''''
 def login(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('base.html')
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -65,3 +69,5 @@ class ProductDelete(DeleteView):
     model = Product
     context_object_name = 'products'
     success_url = reverse_lazy('productapp:productlist')
+    
+'''''
