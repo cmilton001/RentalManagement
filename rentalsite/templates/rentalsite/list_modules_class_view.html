@@ -2,16 +2,26 @@
 <html>
 <head>
 <style>
+
+.wrapper {
+    text-align: center;
+}
+
+
 .button {
   border: none;
   color: white;
-  padding: 15px 32px;
+  width: 900px;
+  height: 60px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  display: block;
+  font-size: 25px;
+ margin: 10px 5px 15px 20px;
+  padding: 15px 32px;
   cursor: pointer;
+margin-left: auto;
+    margin-right: auto;
 }
 
 .button {background-color: #008CBA;} /* Blue */
@@ -22,9 +32,12 @@
 <h1>Entry Page</h1>
 <p>Change the background color of a button with the background-color property:</p>
 
+<div class="wrapper">
+
 <a href='http://127.0.0.1:8000/rental/details/2/'>
 <button type="submit" class="button button1">Equipment</button>
 </a>
+
 <button class="button button2">Jobs</button>
 <button class="button button2">Vendors</button>
 <button class="button button2">Orders</button>
@@ -32,6 +45,6 @@
 <button class="button button2">Return Slips</button>
 <button class="button button2">Categories</button>
 <button class="button button2">Reports</button>
-
+</div>
 </body>
 </html>
