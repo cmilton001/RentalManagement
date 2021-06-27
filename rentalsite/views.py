@@ -1,19 +1,14 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate as auth
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from rentalsite import models
+from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip
 
 # Create your views here.
-from typing import Any
 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from git import objects
-
-from rentalsite import models
-from django.urls import reverse, reverse_lazy
-from django.views import View
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth import authenticate as auth
-
-from rentalsite.models import Equipment
 
 myModels = [models.Equipment, models.Page, models.Vendor, models.Job, models.OrderMaster, models.InvoiceDetails,
             models.ReturnSlip]
@@ -47,31 +42,28 @@ class ListModules(ListView):  # generic view
     context_object_name = 'modules'
 
 
-'''
-class ProductDetail(DetailView):
-    model = Product
-    template_name = 'productapp/product_detail_class_view.html'
-    context_object_name = 'product'
+class ListDetail(DetailView):
+    model = Equipment
+    template_name = 'rentalsite/equipment_details.html'
+    context_object_name = 'details'
 
 
-class ProductCreate(CreateView):
-    model = Product
-    fields = ['name', 'price', 'quantity', 'description', 'category']
-    template_name = 'productapp/product_new.html'
-    success_url = reverse_lazy('productapp:productlist')
+class EquipmentCreate(CreateView):
+    model = Equipment
+    fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
+    template_name = 'rentalsite/equipment_create.html'
+    success_url = reverse_lazy('rentalsite:create')
 
 
-class ProductUpdate(UpdateView):
-    model = Product
-    fields = ['name', 'price', 'quantity', 'description', 'category']
-    template_name = 'productapp/product_update.html'
-    success_url = reverse_lazy('productapp:productlist')
+class EquipmentUpdate(UpdateView):
+    model = Equipment
+    fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
+    template_name = 'rentalsite/equipment_update.html'
+    success_url = reverse_lazy('rental:update')
 
 
-class ProductDelete(DeleteView):
-    template_name = 'productapp/product_delete_confirmation.html'
-    model = Product
-    context_object_name = 'products'
-    success_url = reverse_lazy('productapp:productlist')
-    
-'''''
+class EquipmentDelete(DeleteView):
+    template_name = 'rentalsite/equipment_delete.html'
+    model = Equipment
+    context_object_name = 'delete'
+    success_url = reverse_lazy('rentalsite:delete')
