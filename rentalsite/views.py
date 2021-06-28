@@ -1,4 +1,6 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
+from django.core.checks import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -19,24 +21,25 @@ def index(request):
 
 
 def myview(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-
-        #if not (user.is_authenticated()):
-          #  return redirect('login.html')
-
-        if user is not None:
-            login(request, user)
-            return redirect('success.html')
+    form = AuthenticationForm(request, data=request.POST)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("rentalsite:modules")
+            else:
+                return redirect("rentalsite:index")
         else:
-            render(request, 'login.html')
-
-
-
-    return render(request, 'login.html')
+            return redirect("rentalsite:index")
+    form = AuthenticationForm()
+    return render(request, template_name="rentalsite/list_modules_class_view.html", context={'base.html': form})
 
 
 # class based views
