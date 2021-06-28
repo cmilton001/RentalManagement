@@ -78,21 +78,26 @@ th, td {
 </div>
 <table class="center">
   <tr>
-    <th scope="row">Asset ID:</th>
-    <td><p>{{ details.assetid }}</p></td>
+    <th scope="row">Vendor Number:</th>
+    <td><p>{{ vendor_details.vendornum }}</p></td>
   </tr>
   <tr>
-   <th scope="row">Make:</th>
-    <td>{{ details.make }}</td>
+   <th scope="row">Name:</th>
+    <td>{{ vendor_details.name }}</td>
   </tr>
   <tr>
-    <th scope="row">Model:</th>
-    <td>{{ details.model }}</td>
+    <th scope="row">Phone Number:</th>
+    <td>{{ vendor_details.phonenum }}</td>
   </tr>
   <tr>
-    <th scope="row">Serial Number:</th>
-    <td>{{ details.serialnum }}</td>
+    <th scope="row">Salesman:</th>
+    <td>{{ vendor_details.salesman }}</td>
   </tr>
+    <tr>
+    <th scope="row">PO Number:</th>
+    <td>{{ vendor_details.ponum }}</td>
+  </tr>
+  <tr>
 </table>
 <a href="delete" >
     <input type="submit" value="Delete">
@@ -100,7 +105,7 @@ th, td {
 <a href="update">
     <input type="submit" value="Update">
     </a>
-<a href="http://127.0.0.1:8000/rental/create/">
+<a href="http://127.0.0.1:8000/rental/vendor_create/">
     <input type="submit" value="Create New">
     </a>
     </body>
