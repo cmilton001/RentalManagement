@@ -24,5 +24,6 @@ import rentalsite.views
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('rental/', include(rentalsite.urls)),
+                  path('', TemplateView.as_view(template_name='base.html')),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
