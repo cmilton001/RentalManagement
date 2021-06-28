@@ -18,7 +18,7 @@ class VendorForm(forms.ModelForm):
 class PageForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = 'name'
+        fields = ('name',)
 
 
 class JobForm(forms.ModelForm):
@@ -42,7 +42,7 @@ class ReturnSlipForm(forms.ModelForm):
 class OrderMasterForm(forms.ModelForm):
     class Meta:
         model = OrderMaster
-        fields = ('ordernum', 'jobnums', 'vendornum', 'assetnum', 'dateplaced', 'dateneeded'
+        fields = ('ordernum', 'jobnums', 'vendornum', 'assetnum', 'dateplaced', 'dateneeded',
                                                                                 'dateentered', 'expecteddur')
 
 

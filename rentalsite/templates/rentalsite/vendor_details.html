@@ -78,37 +78,26 @@ th, td {
 </div>
 <table class="center">
   <tr>
-    <th scope="row">Asset ID:</th>
-    <td><p>{{ details.assetid }}</p></td>
-  </tr>
-  <tr>
-   <th scope="row">Make:</th>
-    <td>{{ details.make }}</td>
-  </tr>
-  <tr>
-    <th scope="row">Model:</th>
-    <td>{{ details.model }}</td>
-  </tr>
-  <tr>
-    <th scope="row">Serial Number:</th>
-    <td>{{ details.serialnum }}</td>
-  </tr>
-      <tr>
     <th scope="row">Vendor Number:</th>
-    <td>{{ details.vendornum }}</td>
+    <td><p>{{ vendor_details.vendornum }}</p></td>
   </tr>
-      <tr>
-    <th scope="row">Category:</th>
-    <td>{{ details.category }}</td>
+  <tr>
+   <th scope="row">Name:</th>
+    <td>{{ vendor_details.name }}</td>
   </tr>
-      <tr>
-    <th scope="row">Buy/Rent:</th>
-    <td>{{ details.buyrent }}</td>
+  <tr>
+    <th scope="row">Phone Number:</th>
+    <td>{{ vendor_details.phonenum }}</td>
   </tr>
-      <tr>
-    <th scope="row">Returned:</th>
-    <td>{{ details.returned }}</td>
+  <tr>
+    <th scope="row">Salesman:</th>
+    <td>{{ vendor_details.salesman }}</td>
   </tr>
+    <tr>
+    <th scope="row">PO Number:</th>
+    <td>{{ vendor_details.ponum }}</td>
+  </tr>
+  <tr>
 </table>
 <a href="delete" >
     <input type="submit" value="Delete">
@@ -116,7 +105,7 @@ th, td {
 <a href="update">
     <input type="submit" value="Update">
     </a>
-<a href="http://127.0.0.1:8000/rental/create/">
+<a href="http://127.0.0.1:8000/rental/vendor_create/">
     <input type="submit" value="Create New">
     </a>
     </body>

@@ -70,7 +70,8 @@ input[type=text]:focus, input[type=password]:focus {
 
 <h2>Rental Management Login Page</h2>
 <div class="bg-img">
-  <form action= "{% url 'modules' %}" class="container">
+  <form action= "{% url 'login' %}" method="post" class="container">
+    {% csrf_token%}
     <h1>Login</h1>
 
     <label for="username"><b>Username</b></label>
