@@ -64,21 +64,21 @@ class EquipmentCreate(CreateView):
     model = Equipment
     fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
     template_name = 'rentalsite/equipment_create.html'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 class EquipmentUpdate(UpdateView):
     model = Equipment
     fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
     template_name = 'rentalsite/equipment_update.html'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 class EquipmentDelete(DeleteView):
     template_name = 'rentalsite/equipment_delete.html'
     model = Equipment
     context_object_name = 'delete'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 # Job Views
@@ -93,21 +93,21 @@ class JobCreate(CreateView):
     model = Job
     fields = ['jobnum', 'ordernum', 'assetid', 'jobdetails', 'phase']
     template_name = 'rentalsite/job_create.html'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 class JobUpdate(UpdateView):
     model = Job
     fields = ['jobnum', 'ordernum', 'assetid', 'jobdetails', 'phase']
     template_name = 'rentalsite/job_update.html'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 class JobDelete(DeleteView):
     template_name = 'rentalsite/job_delete.html'
     model = Job
     context_object_name = 'job_delete'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 # Vendor Views
@@ -122,18 +122,18 @@ class VendorCreate(CreateView):
     model = Vendor
     fields = ['vendornum', 'name', 'phonenum', 'salesman', 'ponum']
     template_name = 'rentalsite/vendor_create.html'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 class VendorUpdate(UpdateView):
     model = Vendor
     fields = ['vendornum', 'name', 'phonenum', 'salesman', 'ponum']
     template_name = 'rentalsite/vendor_update.html'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
 
 
 class VendorDelete(DeleteView):
     template_name = 'rentalsite/vendor_delete.html'
     model = Vendor
     context_object_name = 'vendor_delete'
-    success_url = reverse_lazy('rentalsite:listpages')
+    success_url = reverse_lazy('rentalsite:modules')
