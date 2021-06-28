@@ -1,5 +1,3 @@
-from django.db import models
-
 # Create your models here.
 from django.db import models
 
@@ -11,7 +9,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Page(models.Model):
+class Page(BaseModel):
     name = models.CharField(max_length=200)
 
     class Meta:
@@ -144,6 +142,7 @@ class BuyoutCandidates(models.Model):
     returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
     buyoutprice = models.DecimalField(max_digits=10, decimal_places=2)
     # todaterentals =
+
 
 class BuyoutForm(models.Model):
     jobnum = models.CharField(max_length=200)
