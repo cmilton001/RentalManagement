@@ -117,16 +117,33 @@ class OrderMaster(models.Model):
 
 
 class WeeklyReport(models.Model):
-    pass
+    buyrent = models.CharField(max_length=4, choices=(('b', 'Buy'), ('r', 'Rent')), default='Buy')
+    jobnum = models.CharField(max_length=200)
+    activejob = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    vendornum = models.CharField(max_length=200)
+    returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    datereceived = models.DateField()
+    datereturned = models.DateField()
+    rentaldatefrom = models.DateField()
+    rentaldateto = models.DateField()
 
 
 class AnnualRentalList(models.Model):
-    pass
+    fromcategory = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
+    tocategory = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
+    make = models.CharField(max_length=200)
+    # summary/detail
+    datereceived = models.DateField()
+    datereturned = models.DateField()
 
 
 class BuyoutCandidates(models.Model):
-    pass
-
+    buyrent = models.CharField(max_length=4, choices=(('b', 'Buy'), ('r', 'Rent')), default='Buy')
+    jobnum = models.CharField(max_length=200)
+    vendornum = models.CharField(max_length=200)
+    returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    buyoutprice = models.DecimalField(max_digits=10, decimal_places=2)
+    # todaterentals =
 
 class BuyoutForm(models.Model):
     jobnum = models.CharField(max_length=200)
