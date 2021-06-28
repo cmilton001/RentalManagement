@@ -1,43 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<style>
+
+.wrapper {
+    text-align: center;
+}
+
+
+.button {
+  border: none;
+  color: white;
+  width: 900px;
+  height: 60px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 25px;
+ margin: 10px 5px 15px 20px;
+  padding: 15px 32px;
+  cursor: pointer;
+margin-left: auto;
+    margin-right: auto;
+}
+
+.button {background-color: #008CBA;} /* Blue */
+</style>
 </head>
 <body>
 
-{% block content %}
+<h1>Entry Page</h1>
+<p>Change the background color of a button with the background-color property:</p>
 
-    {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
+<div class="wrapper">
 
-    {% if next %}
-        {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
-        {% else %}
-        <p>Please login to see this page.</p>
-        {% endif %}
-    {% endif %}
+<a href='http://127.0.0.1:8000/rental/details/2/'>
+<button type="submit" class="button button1">Equipment</button>
+</a>
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
-
-{% endblock %}
+<button class="button button2">Jobs</button>
+<button class="button button2">Vendors</button>
+<button class="button button2">Orders</button>
+<button class="button button2">Invoices</button>
+<button class="button button2">Return Slips</button>
+<button class="button button2">Categories</button>
+<button class="button button2">Reports</button>
+</div>
 </body>
 </html>

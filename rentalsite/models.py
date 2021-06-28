@@ -4,6 +4,13 @@ from django.db import models
 from django.db import models
 
 
+class BaseModel(models.Model):
+    objects = models.Manager()
+
+    class Meta:
+        abstract = True
+
+
 class Page(models.Model):
     name = models.CharField(max_length=200)
 
@@ -31,7 +38,7 @@ class Category(models.Model):
     category = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
 
 
-class Equipment(models.Model):
+class Equipment(BaseModel):
     # name = models.CharField(max_length=200)
     # quantity = models.IntegerField()
     # description = models.TextField()
@@ -42,7 +49,7 @@ class Equipment(models.Model):
     model = models.CharField(max_length=200)
     serialnum = models.CharField(max_length=200)
     vendornum = models.CharField(max_length=200)
-    #category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE)
+    # category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE)
     category = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
     buyrent = models.CharField(max_length=4, choices=(('b', 'Buy'), ('r', 'Rent')), default='Buy')
     returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
@@ -107,3 +114,4 @@ class OrderMaster(models.Model):
 
     def __str__(self):
         return self.ordernum
+

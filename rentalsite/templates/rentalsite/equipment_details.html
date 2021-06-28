@@ -50,14 +50,58 @@ body{
   top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
-}</style>
+}
+table {
+  border-collapse: collapse;
+  width: 90%;
+  border: 1px solid #00B4CC;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15%;
+}
+</style>
+<body>
 <div class="wrap">
    <div class="search">
-      <input type="text" class="searchTerm" placeholder="What are you looking for?">
+      <input type="text" class="searchTerm" placeholder="Enter Asset ID of Equipment">
       <button type="submit" class="searchButton">
         <i style= "font-size:24px" class="fa">&#xf002;</i>
      </button>
    </div>
 </div>
+<table class="center">
+  <tr>
+    <th scope="row">Asset ID:</th>
+    <td><p>{{ details.assetid }}</p></td>
+  </tr>
+  <tr>
+   <th scope="row">Make:</th>
+    <td>{{ details.make }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Model:</th>
+    <td>{{ details.model }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Serial Number:</th>
+    <td>{{ details.serialnum }}</td>
+  </tr>
+</table>
+<a href="delete" >
+    <input type="submit" value="Delete">
+    </a>
+<a href="update">
+    <input type="submit" value="Update">
+    </a>
+<a href="http://127.0.0.1:8000/rental/create/">
+    <input type="submit" value="Create New">
+    </a>
     </body>
 </html>

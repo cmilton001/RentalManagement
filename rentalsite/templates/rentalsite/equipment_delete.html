@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-
 <html>
+<style>
+body {
+  background-color: #FF9966;
+  opacity: 0.9;
+}
+</style>
     <head>
         <title>
-            First Web Page
+           Delete view
         </title>
     </head>
-
+<h1>Delete Entry?</h1>
     <body>
-        Hello World!
+        <form method="post">{% csrf_token %}
+<p>Are you sure you want to delete "{{ details.make }}"?</p>
+    <input type="submit" value="Confirm">
+            <a href="http://127.0.0.1:8000/rental/listpages/" > Cancel </a>
+</form>
     </body>
 </html>

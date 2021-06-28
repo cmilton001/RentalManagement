@@ -46,24 +46,25 @@ class ListDetail(DetailView):
     model = Equipment
     template_name = 'rentalsite/equipment_details.html'
     context_object_name = 'details'
+    query_results = Equipment.objects.all()
 
 
 class EquipmentCreate(CreateView):
     model = Equipment
     fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
     template_name = 'rentalsite/equipment_create.html'
-    success_url = reverse_lazy('rentalsite:create')
+    success_url = reverse_lazy('rentalsite:listpages')
 
 
 class EquipmentUpdate(UpdateView):
     model = Equipment
     fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
     template_name = 'rentalsite/equipment_update.html'
-    success_url = reverse_lazy('rental:update')
+    success_url = reverse_lazy('rentalsite:listpages')
 
 
 class EquipmentDelete(DeleteView):
     template_name = 'rentalsite/equipment_delete.html'
     model = Equipment
     context_object_name = 'delete'
-    success_url = reverse_lazy('rentalsite:delete')
+    success_url = reverse_lazy('rentalsite:listpages')
