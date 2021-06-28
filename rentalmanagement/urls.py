@@ -19,13 +19,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from rentalsite import urls
+from rentalsite import urls, views
 
 import rentalsite.views
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('rental/', include(rentalsite.urls)),
-                  path('', TemplateView.as_view(template_name='base.html')),
+                  #path('', TemplateView.as_view(template_name='base.html')),
+                  path('', views.index, name='index'),
+                  path('login/', views.myview, name='login'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

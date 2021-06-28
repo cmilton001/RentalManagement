@@ -8,7 +8,6 @@ urlpatterns = [
 
 #class based views urls
     path('listpages/', views.ListModules.as_view(), name='listpages'),
-    path('login/', views.index, name='login'),
     path('create/', views.EquipmentCreate.as_view(), name='create'),
     path('details/<int:pk>/delete/', views.EquipmentDelete.as_view(), name='delete'),
     path('details/<int:pk>/', views.ListDetail.as_view(), name='details'),

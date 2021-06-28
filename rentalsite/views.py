@@ -1,5 +1,5 @@
-from django.contrib.auth import authenticate as auth
-from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -18,20 +18,25 @@ def index(request):
     return render(request, 'base.html')
 
 
-def login(request):
-    if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('rentalsite:listpages'))
+def myview(request):
     if request.method == 'POST':
         username = request.POST.get('username')
+
         password = request.POST.get('password')
-        user = auth.authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
+
+        #if not (user.is_authenticated()):
+          #  return redirect('login.html')
 
         if user is not None:
-            auth.login(request, user)
-            return redirect('list_modules_class_view.html')
+            login(request, user)
+            return redirect('success.html')
         else:
-            print('Invalid login credentials')
-    return render(request, 'base.html')
+            render(request, 'login.html')
+
+
+
+    return render(request, 'login.html')
 
 
 # class based views
