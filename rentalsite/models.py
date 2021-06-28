@@ -96,7 +96,7 @@ class InvoiceDetails(models.Model):
 class ReturnSlip(models.Model):
     ordernum = models.CharField(max_length=200)
     invoicenum = models.CharField(max_length=200)
-    returndate = models.CharField(max_length=200)
+    returndate = models.DateField()
 
     def __str__(self):
         return self.ordernum
@@ -107,11 +107,45 @@ class OrderMaster(models.Model):
     jobnums = models.CharField(max_length=200)
     vendornum = models.CharField(max_length=200)
     assetnum = models.CharField(max_length=200)
-    dateplaced = models.CharField(max_length=200)
-    dateneeded = models.CharField(max_length=200)
-    dateentered = models.CharField(max_length=200)
-    expecteddur = models.CharField(max_length=200)
+    dateplaced = models.DateField()
+    dateneeded = models.DateField()
+    dateentered = models.DateField()
+    expecteddur = models.DateField()
 
     def __str__(self):
         return self.ordernum
 
+
+class WeeklyReport(models.Model):
+    buyrent = models.CharField(max_length=4, choices=(('b', 'Buy'), ('r', 'Rent')), default='Buy')
+    jobnum = models.CharField(max_length=200)
+    activejob = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    vendornum = models.CharField(max_length=200)
+    returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    datereceived = models.DateField()
+    datereturned = models.DateField()
+    rentaldatefrom = models.DateField()
+    rentaldateto = models.DateField()
+
+
+class AnnualRentalList(models.Model):
+    fromcategory = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
+    tocategory = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
+    make = models.CharField(max_length=200)
+    # summary/detail
+    datereceived = models.DateField()
+    datereturned = models.DateField()
+
+
+class BuyoutCandidates(models.Model):
+    buyrent = models.CharField(max_length=4, choices=(('b', 'Buy'), ('r', 'Rent')), default='Buy')
+    jobnum = models.CharField(max_length=200)
+    vendornum = models.CharField(max_length=200)
+    returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    buyoutprice = models.DecimalField(max_digits=10, decimal_places=2)
+    # todaterentals =
+
+class BuyoutForm(models.Model):
+    jobnum = models.CharField(max_length=200)
+    vendornum = models.CharField(max_length=200)
+    rentalassetid = models.CharField(max_length=200)
