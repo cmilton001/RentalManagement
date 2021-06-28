@@ -96,7 +96,7 @@ class InvoiceDetails(models.Model):
 class ReturnSlip(models.Model):
     ordernum = models.CharField(max_length=200)
     invoicenum = models.CharField(max_length=200)
-    returndate = models.CharField(max_length=200)
+    returndate = models.DateField()
 
     def __str__(self):
         return self.ordernum
@@ -107,11 +107,28 @@ class OrderMaster(models.Model):
     jobnums = models.CharField(max_length=200)
     vendornum = models.CharField(max_length=200)
     assetnum = models.CharField(max_length=200)
-    dateplaced = models.CharField(max_length=200)
-    dateneeded = models.CharField(max_length=200)
-    dateentered = models.CharField(max_length=200)
-    expecteddur = models.CharField(max_length=200)
+    dateplaced = models.DateField()
+    dateneeded = models.DateField()
+    dateentered = models.DateField()
+    expecteddur = models.DateField()
 
     def __str__(self):
         return self.ordernum
 
+
+class WeeklyReport(models.Model):
+    pass
+
+
+class AnnualRentalList(models.Model):
+    pass
+
+
+class BuyoutCandidates(models.Model):
+    pass
+
+
+class BuyoutForm(models.Model):
+    jobnum = models.CharField(max_length=200)
+    vendornum = models.CharField(max_length=200)
+    rentalassetid = models.CharField(max_length=200)
