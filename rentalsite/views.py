@@ -24,16 +24,18 @@ def myview(request):  # login
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
-        form = AuthenticationForm(request, data=request.POST)
+        # form = AuthenticationForm(request, data=request.POST)
+
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+            print('in form valid')
+            # username = form.cleaned_data.get('username')
+            # password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect("rentalsite:modules")
             else:
-                return redirect("rentalsite:index")
+                return redirect("index")
         else:
             return redirect("index")
     else:
