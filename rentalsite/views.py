@@ -6,10 +6,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from rentalsite import models, forms
 from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
 from django.contrib.auth.decorators import login_required, user_passes_test
+from rentalsite.mixin import GroupRequiredMixin
+from django.views.generic import View
 
 
 # Create your views here.
@@ -74,21 +76,24 @@ class ListDetail(DetailView):
     context_object_name = 'details'
 
 
-class EquipmentCreate(CreateView):
+class EquipmentCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
     model = Equipment
     fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
     template_name = 'rentalsite/equipment_create.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class EquipmentUpdate(UpdateView):
+class EquipmentUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
     model = Equipment
     fields = ['assetid', 'make', 'model', 'serialnum', 'vendornum', 'category', 'buyrent', 'returned']
     template_name = 'rentalsite/equipment_update.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class EquipmentDelete(DeleteView):
+class EquipmentDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
     template_name = 'rentalsite/equipment_delete.html'
     model = Equipment
     context_object_name = 'delete'
@@ -109,21 +114,24 @@ class JobListDetail(DetailView):
     context_object_name = 'job_details'
 
 
-class JobCreate(CreateView):
+class JobCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
     model = Job
     fields = ['jobnum', 'ordernum', 'assetid', 'jobdetails', 'phase']
     template_name = 'rentalsite/job_create.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class JobUpdate(UpdateView):
+class JobUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
     model = Job
     fields = ['jobnum', 'ordernum', 'assetid', 'jobdetails', 'phase']
     template_name = 'rentalsite/job_update.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class JobDelete(DeleteView):
+class JobDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
     template_name = 'rentalsite/job_delete.html'
     model = Job
     context_object_name = 'job_delete'
@@ -144,21 +152,24 @@ class VendorListDetail(DetailView):
     context_object_name = 'vendor_details'
 
 
-class VendorCreate(CreateView):
+class VendorCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
     model = Vendor
     fields = ['vendornum', 'name', 'phonenum', 'salesman', 'ponum']
     template_name = 'rentalsite/vendor_create.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class VendorUpdate(UpdateView):
+class VendorUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
     model = Vendor
     fields = ['vendornum', 'name', 'phonenum', 'salesman', 'ponum']
     template_name = 'rentalsite/vendor_update.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class VendorDelete(DeleteView):
+class VendorDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
     template_name = 'rentalsite/vendor_delete.html'
     model = Vendor
     context_object_name = 'vendor_delete'
@@ -179,21 +190,24 @@ class InvoiceListDetail(DetailView):
     context_object_name = 'invoice_details'
 
 
-class InvoiceCreate(CreateView):
+class InvoiceCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
     model = InvoiceDetails
     fields = ['invoicenum', 'ordernum', 'orderdetails', 'price']
     template_name = 'rentalsite/invoice_create.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class InvoiceUpdate(UpdateView):
+class InvoiceUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
     model = InvoiceDetails
     fields = ['invoicenum', 'ordernum', 'orderdetails', 'price']
     template_name = 'rentalsite/invoice_update.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class InvoiceDelete(DeleteView):
+class InvoiceDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
     template_name = 'rentalsite/invoice_delete.html'
     model = InvoiceDetails
     context_object_name = 'invoice_delete'
@@ -214,21 +228,24 @@ class ReturnsListDetail(DetailView):
     context_object_name = 'returns_details'
 
 
-class ReturnsCreate(CreateView):
+class ReturnsCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
     model = ReturnSlip
     fields = ['ordernum', 'invoicenum', 'returndate']
     template_name = 'rentalsite/returns_create.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class ReturnsUpdate(UpdateView):
+class ReturnsUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
     model = ReturnSlip
     fields = ['ordernum', 'invoicenum', 'returndate']
     template_name = 'rentalsite/returns_update.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class ReturnsDelete(DeleteView):
+class ReturnsDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
     template_name = 'rentalsite/returns_delete.html'
     model = ReturnSlip
     context_object_name = 'returns_delete'
@@ -249,21 +266,24 @@ class OrderListDetail(DetailView):
     context_object_name = 'order_details'
 
 
-class OrderCreate(CreateView):
+class OrderCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
     model = OrderMaster
     fields = ['ordernum', 'jobnums', 'vendornum', 'assetid', 'dateplaced', 'dateneeded', 'dateentered', 'expecteddur']
     template_name = 'rentalsite/order_create.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class OrderUpdate(UpdateView):
+class OrderUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
     model = OrderMaster
     fields = ['ordernum', 'jobnums', 'vendornum', 'assetid', 'dateplaced', 'dateneeded', 'dateentered', 'expecteddur']
     template_name = 'rentalsite/order_update.html'
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class OrderDelete(DeleteView):
+class OrderDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
     template_name = 'rentalsite/order_delete.html'
     model = OrderMaster
     context_object_name = 'order_delete'
@@ -284,7 +304,8 @@ class WeeklyReportListDetail(DetailView):
     context_object_name = 'weeklyreport_details'
 
 
-class WeeklyReportCreate(CreateView):
+class WeeklyReportCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
     model = WeeklyReport
     fields = ['buyrent', 'jobnum', 'activejob', 'vendornum', 'returned', 'datereceived', 'datereturned',
               'rentaldatefrom', 'rentaldateto', ]
@@ -292,7 +313,8 @@ class WeeklyReportCreate(CreateView):
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class WeeklyReportUpdate(UpdateView):
+class WeeklyReportUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
     model = WeeklyReport
     fields = ['buyrent', 'jobnum', 'activejob', 'vendornum', 'returned', 'datereceived', 'datereturned',
               'rentaldatefrom', 'rentaldateto', ]
@@ -300,7 +322,8 @@ class WeeklyReportUpdate(UpdateView):
     success_url = reverse_lazy('rentalsite:modules')
 
 
-class WeeklyReportDelete(DeleteView):
+class WeeklyReportDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
     template_name = 'rentalsite/weeklyreport_delete.html'
     model = WeeklyReport
     context_object_name = 'weeklyreport_delete'
