@@ -51,32 +51,6 @@ def logout_view(request):
     return redirect('index')
 
 
-### Testing Decorator ###
-def permission_required(perm, login_url=None, raise_exception=False):
-    """
-    Decorator for views that checks whether a user has a particular permission
-    enabled, redirecting to the log-in page if necessary.
-    If the raise_exception parameter is given the PermissionDenied exception
-    is raised.
-    """
-
-    def check_perms(user):
-        if isinstance(perm, str):
-            perms = (perm,)
-        else:
-            perms = perm
-        # First check if the user has the permission (even anon users)
-        if user.has_perms(perms):
-            return True
-        # In case the 403 handler should be called raise the exception
-        if raise_exception:
-            raise PermissionDenied
-        # As the last resort, show the login form
-        return False
-
-    return user_passes_test(check_perms, login_url=login_url)
-
-
 class ListModules(TemplateView):  # generic view
     template_name = 'rentalsite/list_modules_class_view.html'
     model = Equipment
@@ -219,4 +193,39 @@ class InvoiceDelete(DeleteView):
     template_name = 'rentalsite/invoice_delete.html'
     model = InvoiceDetails
     context_object_name = 'invoice_delete'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+# Return Slip Views
+
+class ReturnsList(ListView):  # generic view
+    template_name = 'rentalsite/returns_list.html'
+    model = ReturnSlip
+    context_object_name = 'returns_list'
+
+
+class ReturnsListDetail(DetailView):
+    model = ReturnSlip
+    template_name = 'rentalsite/returns_details.html'
+    context_object_name = 'returns_details'
+
+
+class ReturnsCreate(CreateView):
+    model = ReturnSlip
+    fields = ['ordernum', 'invoicenum', 'returndate']
+    template_name = 'rentalsite/returns_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class ReturnsUpdate(UpdateView):
+    model = ReturnSlip
+    fields = ['ordernum', 'invoicenum', 'returndate']
+    template_name = 'rentalsite/returns_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class ReturnsDelete(DeleteView):
+    template_name = 'rentalsite/returns_delete.html'
+    model = ReturnSlip
+    context_object_name = 'returns_delete'
     success_url = reverse_lazy('rentalsite:modules')

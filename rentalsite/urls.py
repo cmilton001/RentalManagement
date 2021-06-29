@@ -32,5 +32,11 @@ urlpatterns = [
     path('invoice_create/', views.InvoiceCreate.as_view(), name='invoice_create'),
     path('invoice_details/<int:pk>/invoice_update/', views.InvoiceUpdate.as_view(), name='invoice_update'),
     path('invoice_details/<int:pk>/invoice_delete/', views.InvoiceDelete.as_view(), name='invoice_delete'),
+    ### ReturnSlip URLS ###
+    path('returns_details/<int:pk>/returns_list/', views.ReturnsList.as_view(), name='returns_list'),
+    path('returns_details/<int:pk>/', views.ReturnsListDetail.as_view(), name='returns_details'),
+    path('returns_create/', views.ReturnsCreate.as_view(), name='returns_create'),
+    path('returns_details/<int:pk>/returns_update/', views.ReturnsUpdate.as_view(), name='returns_update'),
+    path('returns_details/<int:pk>/returns_delete/', views.ReturnsDelete.as_view(), name='returns_delete'),
 
 ]
