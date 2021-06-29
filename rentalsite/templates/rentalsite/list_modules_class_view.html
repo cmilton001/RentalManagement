@@ -28,10 +28,16 @@ margin-left: auto;
 </style>
 </head>
 <body>
-
+<style>
+ h2 {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+</style>
 <h1>Entry Page</h1>
-<h2>Hi {{ user.username }}</h2>
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+<h2 style="text-align:right">Hi {{ user.username }}</h2>
+  <p style="text-align:right"><a href="{% url 'logout' %}">Log Out</a></p>
 
 <div class="wrapper">
 
