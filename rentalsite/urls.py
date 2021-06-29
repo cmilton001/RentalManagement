@@ -1,5 +1,6 @@
 from django.urls import path
 from rentalsite import views
+from rentalsite.views import EquipmentSearchView
 
 app_name = 'rentalsite'
 
@@ -9,6 +10,7 @@ urlpatterns = [
     # class based views urls
     path('listpages/', views.ListModules.as_view(), name='modules'),
     ### Equipment URLS ###
+    path('equipment_search/', views.EquipmentSearchView.as_view(), name='equipment_search'),
     path('details/<int:pk>/equipment_list/', views.EquipmentList.as_view(), name='equipment_list'),
     path('create/', views.EquipmentCreate.as_view(), name='create'),
     path('details/<int:pk>/delete/', views.EquipmentDelete.as_view(), name='delete'),

@@ -2,9 +2,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.checks import messages
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.template.context_processors import request
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
@@ -74,6 +76,21 @@ class ListDetail(DetailView):
     model = Equipment
     template_name = 'rentalsite/equipment_details.html'
     context_object_name = 'details'
+
+
+class EquipmentSearchView(ListView):
+    model = Equipment
+    template_name = 'rentalsite/equipment_search.html'
+    context_object_name = 'equipment_search'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Equipment.objects.filter(
+            Q(make__icontains=query) | Q(model__icontains=query) | Q(assetid__icontains=query) |
+            Q(serialnum__icontains=query) | Q(vendornum__icontains=query) | Q(category__icontains=query)
+            | Q(buyrent__icontains=query) | Q(returned__icontains=query)
+        )
+        return object_list
 
 
 class EquipmentCreate(GroupRequiredMixin, CreateView):

@@ -56,7 +56,6 @@ table {
   width: 90%;
   border: 1px solid #00B4CC;
 }
-
 th, td {
   text-align: left;
   padding: 16px;
@@ -69,12 +68,14 @@ th, td {
 </style>
 <body>
 <div class="wrap">
+    <form action="{% url 'rentalsite:equipment_search' %}" method="get">
    <div class="search">
-      <input type="text" class="searchTerm" placeholder="Search">
+      <input name="q" type="text" class="searchTerm" placeholder="Search">
       <button type="submit" class="searchButton">
         <i style= "font-size:24px" class="fa">&#xf002;</i>
      </button>
    </div>
+    </form>
 </div>
 <table class="center">
   <tr>
