@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from rentalsite import models, forms
-from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip
+from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
@@ -49,6 +49,10 @@ def myview(request):  # login
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+def reports(request):
+    return render(request, 'rentalsite/reports_list.html')
 
 
 class ListModules(TemplateView):  # generic view
@@ -263,4 +267,41 @@ class OrderDelete(DeleteView):
     template_name = 'rentalsite/order_delete.html'
     model = OrderMaster
     context_object_name = 'order_delete'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+# Weekly Report Views
+
+class WeeklyReportList(ListView):  # generic view
+    template_name = 'rentalsite/weeklyreport_list.html'
+    model = OrderMaster
+    context_object_name = 'weeklyreport_list'
+
+
+class WeeklyReportListDetail(DetailView):
+    model = WeeklyReport
+    template_name = 'rentalsite/weeklyreport_details.html'
+    context_object_name = 'weeklyreport_details'
+
+
+class WeeklyReportCreate(CreateView):
+    model = WeeklyReport
+    fields = ['buyrent', 'jobnum', 'activejob', 'vendornum', 'returned', 'datereceived', 'datereturned',
+              'rentaldatefrom', 'rentaldateto', ]
+    template_name = 'rentalsite/weeklyreport_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class WeeklyReportUpdate(UpdateView):
+    model = WeeklyReport
+    fields = ['buyrent', 'jobnum', 'activejob', 'vendornum', 'returned', 'datereceived', 'datereturned',
+              'rentaldatefrom', 'rentaldateto', ]
+    template_name = 'rentalsite/weeklyreport_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class WeeklyReportDelete(DeleteView):
+    template_name = 'rentalsite/weeklyreport_delete.html'
+    model = WeeklyReport
+    context_object_name = 'weeklyreport_delete'
     success_url = reverse_lazy('rentalsite:modules')

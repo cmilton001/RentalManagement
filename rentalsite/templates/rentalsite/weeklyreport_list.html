@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<h1>List of Weekly Reports</h1>
+<style>
+body {
+  background-color: #c7c4d9;
+  opacity: 0.8;
+}
+</style>
+<body>
+<ul>
+    <!-- Iterate over object_list -->
+    {% for object in object_list %}
+    <!-- Display Objects -->
+    <li><b>Report Number:</b> {{ object.id }}</li>
+    <li><b>Job Number:</b> {{ object.jobnum }}</li>
+
+    <hr/>
+    <!-- If objet_list is empty  -->
+    {% empty %}
+    <li>No objects yet.</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

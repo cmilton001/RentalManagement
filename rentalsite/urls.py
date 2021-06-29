@@ -44,5 +44,16 @@ urlpatterns = [
     path('order_create/', views.OrderCreate.as_view(), name='order_create'),
     path('order_details/<int:pk>/order_update/', views.OrderUpdate.as_view(), name='order_update'),
     path('order_details/<int:pk>/order_delete/', views.OrderDelete.as_view(), name='order_delete'),
+    ### Reports page ###
+    path('reports_list/', views.reports, name='reports_list'),
+    ### Weekly Report URLS ###
+    path('weeklyreport_details/<int:pk>/weeklyreport_list/', views.WeeklyReportList.as_view(),
+         name='weeklyreport_list'),
+    path('weeklyreport_details/<int:pk>/', views.WeeklyReportListDetail.as_view(), name='weeklyreport_details'),
+    path('weeklyreport_create/', views.WeeklyReportCreate.as_view(), name='weeklyreport_create'),
+    path('weeklyreport_details/<int:pk>/weeklyreport_update/', views.WeeklyReportUpdate.as_view(),
+         name='weeklyreport_update'),
+    path('weeklyreport_details/<int:pk>/weeklyreport_delete/', views.WeeklyReportDelete.as_view(),
+         name='weeklyreport_delete'),
 
 ]

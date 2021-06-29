@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: ;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+table {
+  border-collapse: collapse;
+  width: 90%;
+  border: 1px solid #00B4CC;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15%;
+}
+</style>
+<body>
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="Search">
+      <button type="submit" class="searchButton">
+        <i style= "font-size:24px" class="fa">&#xf002;</i>
+     </button>
+   </div>
+</div>
+<table class="center">
+  <tr>
+    <th scope="row">Job Number:</th>
+    <td><p>{{ weeklyreport_details.jobnum }}</p></td>
+  </tr>
+  <tr>
+   <th scope="row">Vendor Number:</th>
+    <td>{{ weeklyreport_details.vendornum }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Date Received:</th>
+    <td>{{ weeklyreport_details.datereceived }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Date Returned:</th>
+    <td>{{ weeklyreport_details.datereturned }}</td>
+  </tr>
+    <tr>
+    <th scope="row">Rental Date From:</th>
+    <td>{{ weeklyreport_details.rentaldatefrom }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Rental Date To:</th>
+    <td>{{ weeklyreport_details.rentaldateto }}</td>
+  </tr>
+      <tr>
+    <th scope="row">Returned:</th>
+    <td>{{ weeklyreport_details.returned }}</td>
+  </tr>
+      <tr>
+    <th scope="row">Buy/Rent:</th>
+    <td>{{ weeklyreport_details.buyrent }}</td>
+  </tr>
+      <tr>
+    <th scope="row">Active Job:</th>
+    <td>{{ weeklyreport_details.activejob }}</td>
+  </tr>
+</table>
+<a href="weeklyreport_delete" >
+    <input type="submit" value="Delete">
+    </a>
+<a href="weeklyreport_update">
+    <input type="submit" value="Update">
+    </a>
+<a href="http://127.0.0.1:8000/rental/weeklyreport_create/">
+    <input type="submit" value="Create New">
+    </a>
+<a href="weeklyreport_list">
+    <input type="submit" value="View List">
+    </a>
+    </body>
+</html>

@@ -106,11 +106,11 @@ class OrderMaster(models.Model):
 
 
 class WeeklyReport(models.Model):
-    buyrent = models.CharField(max_length=4, choices=(('b', 'Buy'), ('r', 'Rent')), default='Buy')
+    buyrent = models.CharField(max_length=4, choices=(('buy', 'Buy'), ('rent', 'Rent')), default='Buy')
     jobnum = models.CharField(max_length=200)
-    activejob = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    activejob = models.CharField(max_length=3, choices=(('yes', 'Yes'), ('no', 'No')))
     vendornum = models.CharField(max_length=200)
-    returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
+    returned = models.CharField(max_length=3, choices=(('yes', 'Yes'), ('no', 'No')))
     datereceived = models.DateField()
     datereturned = models.DateField()
     rentaldatefrom = models.DateField()
