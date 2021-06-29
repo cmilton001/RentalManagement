@@ -1,15 +1,11 @@
 # Create your models here.
+from django.contrib import admin, auth
+from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
-class BaseModel(models.Model):
-    objects = models.Manager()
-
-    class Meta:
-        abstract = True
-
-
-class Page(BaseModel):
+class Page(models.Model):
     name = models.CharField(max_length=200)
 
     class Meta:
@@ -36,12 +32,7 @@ class Category(models.Model):
     category = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
 
 
-class Equipment(BaseModel):
-    # name = models.CharField(max_length=200)
-    # quantity = models.IntegerField()
-    # description = models.TextField()
-    # price = models.DecimalField(max_digits=4, decimal_places=2)
-    # picture = models.ImageField(upload_to='images', db_column='picture', blank=True, null=True)
+class Equipment(models.Model):
     assetid = models.CharField(max_length=200)
     make = models.CharField(max_length=200)
     model = models.CharField(max_length=200)
@@ -148,3 +139,37 @@ class BuyoutForm(models.Model):
     jobnum = models.CharField(max_length=200)
     vendornum = models.CharField(max_length=200)
     rentalassetid = models.CharField(max_length=200)
+
+
+class Admin(Group):
+    def has_add_permission(self, request):
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_view_permission(self, request):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+    def has_module_permission(self, request):
+        return True
+
+
+class Viewer(Group):
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_module_permission(self, request):
+        return False
+
+    def has_view_permission(self, request):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False

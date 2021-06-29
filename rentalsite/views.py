@@ -1,15 +1,13 @@
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.checks import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
-import rentalsite
 from rentalsite import models, forms
-from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip
+from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, Admin
 
 
 # Create your views here.
@@ -17,7 +15,7 @@ def index(request):
     return render(request, 'base.html')
 
 
-def myview(request): #login
+def myview(request):  # login
     print('in myview')
     if request.method == "POST":
         print('in post')
@@ -44,6 +42,10 @@ def myview(request): #login
 
 
 # class based views
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+
 
 class ListModules(ListView):  # generic view
     template_name = 'rentalsite/list_modules_class_view.html'
@@ -57,7 +59,6 @@ class ListDetail(DetailView):
     model = Equipment
     template_name = 'rentalsite/equipment_details.html'
     context_object_name = 'details'
-    query_results = Equipment.objects.all()
 
 
 class EquipmentCreate(CreateView):
