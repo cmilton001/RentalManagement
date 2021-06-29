@@ -121,7 +121,7 @@ class AnnualRentalList(models.Model):
     fromcategory = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
     tocategory = models.CharField(max_length=255, choices=CATEGORY_CHOICES, default="Earth Moving")
     make = models.CharField(max_length=200)
-    # summary/detail
+    summaryordetail = models.CharField(max_length=1)
     datereceived = models.DateField()
     datereturned = models.DateField()
 
@@ -132,7 +132,7 @@ class BuyoutCandidates(models.Model):
     vendornum = models.CharField(max_length=200)
     returned = models.CharField(max_length=1, choices=(('y', 'Y'), ('n', 'N')))
     buyoutprice = models.DecimalField(max_digits=10, decimal_places=2)
-    # todaterentals =
+    todaterentals = models.CharField(max_length=200)
 
 
 class BuyoutForm(models.Model):
