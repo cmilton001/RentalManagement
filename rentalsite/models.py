@@ -141,35 +141,3 @@ class BuyoutForm(models.Model):
     rentalassetid = models.CharField(max_length=200)
 
 
-class Admin(Group):
-    def has_add_permission(self, request):
-        return True
-
-    def has_change_permission(self, request, obj=None):
-        return True
-
-    def has_view_permission(self, request):
-        return True
-
-    def has_delete_permission(self, request, obj=None):
-        return True
-
-    def has_module_permission(self, request):
-        return True
-
-
-class Viewer(Group):
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_module_permission(self, request):
-        return False
-
-    def has_view_permission(self, request):
-        return True
-
-    def has_delete_permission(self, request, obj=None):
-        return False

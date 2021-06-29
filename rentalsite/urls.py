@@ -21,7 +21,12 @@ urlpatterns = [
     ### Vendor URLS ###
     path('vendor_details/<int:pk>/', views.VendorListDetail.as_view(), name='vendor_details'),
     path('vendor_create/', views.VendorCreate.as_view(), name='vendor_create'),
-    path('vendor_details/<int:pk>/update/', views.VendorUpdate.as_view(), name='vendor_update'),
-    path('vendor_details/<int:pk>/delete/', views.VendorDelete.as_view(), name='vendor_delete'),
+    path('vendor_details/<int:pk>/vendor_update/', views.VendorUpdate.as_view(), name='vendor_update'),
+    path('vendor_details/<int:pk>/vendor_delete/', views.VendorDelete.as_view(), name='vendor_delete'),
+    ### InvoiceDetails URLS ###
+    path('invoice_details/<int:pk>/', views.InvoiceListDetail.as_view(), name='invoice_details'),
+    path('invoice_create/', views.InvoiceCreate.as_view(), name='invoice_create'),
+    path('invoice_details/<int:pk>/invoice_update/', views.InvoiceUpdate.as_view(), name='invoice_update'),
+    path('invoice_details/<int:pk>/invoice_delete/', views.InvoiceDelete.as_view(), name='invoice_delete'),
 
 ]

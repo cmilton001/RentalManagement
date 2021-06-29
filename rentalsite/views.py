@@ -1,13 +1,15 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.checks import messages
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from rentalsite import models, forms
-from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, Admin
+from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 # Create your views here.
@@ -47,6 +49,32 @@ def myview(request):  # login
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+### Testing Decorator ###
+def permission_required(perm, login_url=None, raise_exception=False):
+    """
+    Decorator for views that checks whether a user has a particular permission
+    enabled, redirecting to the log-in page if necessary.
+    If the raise_exception parameter is given the PermissionDenied exception
+    is raised.
+    """
+
+    def check_perms(user):
+        if isinstance(perm, str):
+            perms = (perm,)
+        else:
+            perms = perm
+        # First check if the user has the permission (even anon users)
+        if user.has_perms(perms):
+            return True
+        # In case the 403 handler should be called raise the exception
+        if raise_exception:
+            raise PermissionDenied
+        # As the last resort, show the login form
+        return False
+
+    return user_passes_test(check_perms, login_url=login_url)
 
 
 class ListModules(ListView):  # generic view
@@ -139,4 +167,33 @@ class VendorDelete(DeleteView):
     template_name = 'rentalsite/vendor_delete.html'
     model = Vendor
     context_object_name = 'vendor_delete'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+# InvoiceDetails Views
+
+class InvoiceListDetail(DetailView):
+    model = InvoiceDetails
+    template_name = 'rentalsite/invoice_details.html'
+    context_object_name = 'invoice_details'
+
+
+class InvoiceCreate(CreateView):
+    model = InvoiceDetails
+    fields = ['invoicenum', 'ordernum', 'orderdetails', 'price']
+    template_name = 'rentalsite/invoice_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class InvoiceUpdate(UpdateView):
+    model = InvoiceDetails
+    fields = ['invoicenum', 'ordernum', 'orderdetails', 'price']
+    template_name = 'rentalsite/invoice_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class InvoiceDelete(DeleteView):
+    template_name = 'rentalsite/invoice_delete.html'
+    model = InvoiceDetails
+    context_object_name = 'invoice_delete'
     success_url = reverse_lazy('rentalsite:modules')

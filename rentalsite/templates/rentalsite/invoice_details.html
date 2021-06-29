@@ -78,34 +78,28 @@ th, td {
 </div>
 <table class="center">
   <tr>
-    <th scope="row">Vendor Number:</th>
-    <td><p>{{ vendor_details.vendornum }}</p></td>
+    <th scope="row">Invoice Number:</th>
+    <td><p>{{ invoice_details.invoicenum }}</p></td>
   </tr>
   <tr>
-   <th scope="row">Name:</th>
-    <td>{{ vendor_details.name }}</td>
+   <th scope="row">Order Number:</th>
+    <td>{{ invoice_details.ordernum }}</td>
   </tr>
   <tr>
-    <th scope="row">Phone Number:</th>
-    <td>{{ vendor_details.phonenum }}</td>
+    <th scope="row">Order Details:</th>
+    <td>{{ invoice_details.orderdetails }}</td>
   </tr>
   <tr>
-    <th scope="row">Salesman:</th>
-    <td>{{ vendor_details.salesman }}</td>
-  </tr>
-    <tr>
-    <th scope="row">PO Number:</th>
-    <td>{{ vendor_details.ponum }}</td>
-  </tr>
-  <tr>
+    <th scope="row">Price:</th>
+    <td>{{ invoice_details.price }}</td>
 </table>
-<a href="vendor_delete" >
+<a href="invoice_delete" >
     <input type="submit" value="Delete">
     </a>
-<a href="vendor_update">
+<a href="invoice_update">
     <input type="submit" value="Update">
     </a>
-<a href="http://127.0.0.1:8000/rental/vendor_create/">
+<a href="http://127.0.0.1:8000/rental/invoice_create/">
     <input type="submit" value="Create New">
     </a>
     </body>
