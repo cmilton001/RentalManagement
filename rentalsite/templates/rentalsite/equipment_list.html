@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<h1>List of Equipment</h1>
+<style>
+body {
+  background-color: #c7c4d9;
+  opacity: 0.8;
+}
+</style>
+<body>
+<ul>
+    <!-- Iterate over object_list -->
+    {% for object in object_list %}
+    <!-- Display Objects -->
+    <li><b>Asset ID:</b> {{ object.assetid }}</li>
+    <li><b>Model:</b> {{ object.model }}</li>
+  
+    <hr/>
+    <!-- If objet_list is empty  -->
+    {% empty %}
+    <li>No objects yet.</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from rentalsite import models, forms
 from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -77,13 +77,18 @@ def permission_required(perm, login_url=None, raise_exception=False):
     return user_passes_test(check_perms, login_url=login_url)
 
 
-class ListModules(ListView):  # generic view
+class ListModules(TemplateView):  # generic view
     template_name = 'rentalsite/list_modules_class_view.html'
     model = Equipment
     context_object_name = 'modules'
 
 
 # Equipment Views
+class EquipmentList(ListView):  # generic view
+    template_name = 'rentalsite/equipment_list.html'
+    model = Equipment
+    context_object_name = 'equipment_list'
+
 
 class ListDetail(DetailView):
     model = Equipment
@@ -114,6 +119,12 @@ class EquipmentDelete(DeleteView):
 
 # Job Views
 
+class JobList(ListView):  # generic view
+    template_name = 'rentalsite/job_list.html'
+    model = Job
+    context_object_name = 'job_list'
+
+
 class JobListDetail(DetailView):
     model = Job
     template_name = 'rentalsite/job_details.html'
@@ -143,6 +154,12 @@ class JobDelete(DeleteView):
 
 # Vendor Views
 
+class VendorList(ListView):  # generic view
+    template_name = 'rentalsite/vendor_list.html'
+    model = Vendor
+    context_object_name = 'vendor_list'
+
+
 class VendorListDetail(DetailView):
     model = Vendor
     template_name = 'rentalsite/vendor_details.html'
@@ -171,6 +188,12 @@ class VendorDelete(DeleteView):
 
 
 # InvoiceDetails Views
+
+class InvoiceList(ListView):  # generic view
+    template_name = 'rentalsite/invoice_list.html'
+    model = InvoiceDetails
+    context_object_name = 'invoice_list'
+
 
 class InvoiceListDetail(DetailView):
     model = InvoiceDetails
