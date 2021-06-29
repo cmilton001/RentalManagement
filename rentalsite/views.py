@@ -51,14 +51,14 @@ def logout_view(request):
     return redirect('index')
 
 
-def reports(request):
-    return render(request, 'rentalsite/reports_list.html')
-
-
 class ListModules(TemplateView):  # generic view
     template_name = 'rentalsite/list_modules_class_view.html'
     model = Equipment
     context_object_name = 'modules'
+
+
+def reports(request):
+    return render(request, 'rentalsite/reports_list.html')
 
 
 # Equipment Views
