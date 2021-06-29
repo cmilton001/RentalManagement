@@ -95,11 +95,11 @@ class OrderMaster(models.Model):
     ordernum = models.CharField(max_length=200)
     jobnums = models.CharField(max_length=200)
     vendornum = models.CharField(max_length=200)
-    assetnum = models.CharField(max_length=200)
+    assetid = models.CharField(max_length=200)
     dateplaced = models.DateField()
     dateneeded = models.DateField()
     dateentered = models.DateField()
-    expecteddur = models.DateField()
+    expecteddur = models.CharField(max_length=200)
 
     def __str__(self):
         return self.ordernum

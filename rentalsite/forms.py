@@ -42,8 +42,8 @@ class ReturnSlipForm(forms.ModelForm):
 class OrderMasterForm(forms.ModelForm):
     class Meta:
         model = OrderMaster
-        fields = ('ordernum', 'jobnums', 'vendornum', 'assetnum', 'dateplaced', 'dateneeded',
-                                                                                'dateentered', 'expecteddur')
+        fields = ('ordernum', 'jobnums', 'vendornum', 'assetid', 'dateplaced', 'dateneeded',
+                  'dateentered', 'expecteddur')
 
 
 class CategoryForm(forms.ModelForm):

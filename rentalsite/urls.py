@@ -38,5 +38,11 @@ urlpatterns = [
     path('returns_create/', views.ReturnsCreate.as_view(), name='returns_create'),
     path('returns_details/<int:pk>/returns_update/', views.ReturnsUpdate.as_view(), name='returns_update'),
     path('returns_details/<int:pk>/returns_delete/', views.ReturnsDelete.as_view(), name='returns_delete'),
+    ### Orders URLS ###
+    path('order_details/<int:pk>/order_list/', views.OrderList.as_view(), name='order_list'),
+    path('order_details/<int:pk>/', views.OrderListDetail.as_view(), name='order_details'),
+    path('order_create/', views.OrderCreate.as_view(), name='order_create'),
+    path('order_details/<int:pk>/order_update/', views.OrderUpdate.as_view(), name='order_update'),
+    path('order_details/<int:pk>/order_delete/', views.OrderDelete.as_view(), name='order_delete'),
 
 ]

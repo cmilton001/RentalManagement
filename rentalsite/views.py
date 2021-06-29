@@ -229,3 +229,38 @@ class ReturnsDelete(DeleteView):
     model = ReturnSlip
     context_object_name = 'returns_delete'
     success_url = reverse_lazy('rentalsite:modules')
+
+
+# Order Views
+
+class OrderList(ListView):  # generic view
+    template_name = 'rentalsite/order_list.html'
+    model = OrderMaster
+    context_object_name = 'order_list'
+
+
+class OrderListDetail(DetailView):
+    model = OrderMaster
+    template_name = 'rentalsite/order_details.html'
+    context_object_name = 'order_details'
+
+
+class OrderCreate(CreateView):
+    model = OrderMaster
+    fields = ['ordernum', 'jobnums', 'vendornum', 'assetid', 'dateplaced', 'dateneeded', 'dateentered', 'expecteddur']
+    template_name = 'rentalsite/order_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class OrderUpdate(UpdateView):
+    model = OrderMaster
+    fields = ['ordernum', 'jobnums', 'vendornum', 'assetid', 'dateplaced', 'dateneeded', 'dateentered', 'expecteddur']
+    template_name = 'rentalsite/order_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class OrderDelete(DeleteView):
+    template_name = 'rentalsite/order_delete.html'
+    model = OrderMaster
+    context_object_name = 'order_delete'
+    success_url = reverse_lazy('rentalsite:modules')

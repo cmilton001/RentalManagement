@@ -78,48 +78,48 @@ th, td {
 </div>
 <table class="center">
   <tr>
-    <th scope="row">Asset ID:</th>
-    <td><p>{{ details.assetid }}</p></td>
+    <th scope="row">Order Number:</th>
+    <td><p>{{ order_details.ordernum }}</p></td>
   </tr>
   <tr>
-   <th scope="row">Make:</th>
-    <td>{{ details.make }}</td>
+   <th scope="row">Job Numbers:</th>
+    <td>{{ order_details.jobnums }}</td>
   </tr>
   <tr>
-    <th scope="row">Model:</th>
-    <td>{{ details.model }}</td>
-  </tr>
-  <tr>
-    <th scope="row">Serial Number:</th>
-    <td>{{ details.serialnum }}</td>
-  </tr>
-      <tr>
     <th scope="row">Vendor Number:</th>
-    <td>{{ details.vendornum }}</td>
+    <td>{{ order_details.vendornum }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Asset ID:</th>
+    <td>{{ order_details.assetid }}</td>
   </tr>
       <tr>
-    <th scope="row">Category:</th>
-    <td>{{ details.category }}</td>
+    <th scope="row">Date Placed:</th>
+    <td>{{ order_details.dateplaced }}</td>
   </tr>
       <tr>
-    <th scope="row">Buy/Rent:</th>
-    <td>{{ details.buyrent }}</td>
+    <th scope="row">Date Needed:</th>
+    <td>{{ order_details.dateneeded }}</td>
   </tr>
       <tr>
-    <th scope="row">Returned:</th>
-    <td>{{ details.returned }}</td>
+    <th scope="row">Date Entered:</th>
+    <td>{{ order_details.dateentered }}</td>
+  </tr>
+      <tr>
+    <th scope="row">Expected Duration:</th>
+    <td>{{ order_details.expecteddur }}</td>
   </tr>
 </table>
-<a href="delete" >
+<a href="order_delete" >
     <input type="submit" value="Delete">
     </a>
-<a href="update">
+<a href="order_update">
     <input type="submit" value="Update">
     </a>
-<a href="http://127.0.0.1:8000/rental/create/">
+<a href="http://127.0.0.1:8000/rental/order_create/">
     <input type="submit" value="Create New">
     </a>
-<a href="equipment_list">
+<a href="order_list">
     <input type="submit" value="View List">
     </a>
     </body>
