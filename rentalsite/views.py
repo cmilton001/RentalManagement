@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from rentalsite.mixin import GroupRequiredMixin
 from rentalsite.models import Equipment, Vendor, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport, \
-    AnnualRentalList, BuyoutCandidates, BuyoutForm
+    AnnualRentalList, BuyoutCandidates, BuyoutForm, Category
 
 
 # Create your views here.
@@ -580,4 +580,61 @@ class BuyFormDelete(GroupRequiredMixin, DeleteView):
     template_name = 'rentalsite/buyform_delete.html'
     model = BuyoutForm
     context_object_name = 'buyform_delete'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+# Categories
+
+class CategoryList(ListView):
+    template_name = 'rentalsite/category_list.html'
+    model = Category
+    context_object_name = 'category_list'
+
+
+class CategoryDetail(DetailView):
+    model = Category
+    template_name = 'rentalsite/category_details.html'
+    context_object_name = 'category_details'
+
+
+class CategorySearchView(ListView):
+    model = Category
+    template_name = 'rentalsite/category_search.html'
+    context_object_name = 'category_search'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Category.objects.filter(
+            Q(category__icontains=query)
+        )
+        return object_list
+
+
+class CategoryCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
+    model = Category
+    fields = [('earthmoving', 'Earth Moving'),
+              ('aerial access', 'Aerial Access'),
+              ('compaction', 'Compaction'),
+              ('light towers', 'Light Towers')]
+    template_name = 'rentalsite/category_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class CategoryUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
+    model = Category
+    fields = [('earthmoving', 'Earth Moving'),
+              ('aerial access', 'Aerial Access'),
+              ('compaction', 'Compaction'),
+              ('light towers', 'Light Towers')]
+    template_name = 'rentalsite/category_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class CategoryDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
+    template_name = 'rentalsite/category_delete.html'
+    model = Category
+    context_object_name = 'category_delete'
     success_url = reverse_lazy('rentalsite:modules')

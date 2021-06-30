@@ -82,4 +82,11 @@ urlpatterns = [
     path('buyform_create/', views.BuyFormCreate.as_view(), name='buyform_create'),
     path('buyform_details/<int:pk>/buyform_update/', views.BuyFormUpdate.as_view(), name='buyform_update'),
     path('buyform_details/<int:pk>/buyform_delete/', views.BuyFormDelete.as_view(), name='buyform_delete'),
+    ### Category URLS ###
+    path('category_search/', views.CategorySearchView.as_view(), name='category_search'),
+    path('category_details/<int:pk>/category_list/', views.CategoryList.as_view(), name='category_list'),
+    path('category_details/<int:pk>/', views.CategoryDetail.as_view(), name='category_details'),
+    path('category_create/', views.OrderCreate.as_view(), name='category_create'),
+    path('category_details/<int:pk>/category_update/', views.CategoryUpdate.as_view(), name='category_update'),
+    path('category_details/<int:pk>/category_delete/', views.CategoryDelete.as_view(), name='category_delete'),
 ]
