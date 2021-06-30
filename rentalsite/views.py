@@ -461,7 +461,7 @@ class AnnualSearchView(ListView):
 class AnnualCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Admin']
     model = AnnualRentalList
-    fields = ['buyrent', 'jobnum', 'vendornum', 'returned', 'buyoutprice', 'todaterentals']
+    fields = ['fromcategory', 'tocategory', 'make', 'summaryordetail', 'datereceived', 'datereturned']
     template_name = 'rentalsite/annual_create.html'
     success_url = reverse_lazy('rentalsite:modules')
 
@@ -469,7 +469,7 @@ class AnnualCreate(GroupRequiredMixin, CreateView):
 class AnnualUpdate(GroupRequiredMixin, UpdateView):
     group_required = [u'Admin']
     model = AnnualRentalList
-    fields = ['buyrent', 'jobnum', 'vendornum', 'returned', 'buyoutprice', 'todaterentals']
+    fields = ['fromcategory', 'tocategory', 'make', 'summaryordetail', 'datereceived', 'datereturned']
     template_name = 'rentalsite/annual_update.html'
     success_url = reverse_lazy('rentalsite:modules')
 
