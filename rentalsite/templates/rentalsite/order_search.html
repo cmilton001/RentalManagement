@@ -1,0 +1,23 @@
+<!-- templates/search_results.html -->
+<!DOCTYPE html>
+<html>
+<style>
+body {
+  background-color: #FAEBD7;
+  opacity: 0.9;
+}
+</style>
+<h1>Search Results</h1>
+<body>
+<ul>
+  {% for object in object_list %}
+    <li>
+        <b>Order Number:</b> {{ object.ordernum }}, <b>Job Numbers:</b> {{ object.jobnums }},
+        <b>Vendor Number:</b> {{ object.assetid}}, <b>Date Placed:</b> {{ object.dateplaced }},
+        <b>Date Needed:</b> {{ object.dateneeded }}, <b>Date Entered:</b>
+        {{ object.dateentered }}, <b>Expected Duration:</b> {{ object.expecteddur }}
+    </li>
+  {% endfor %}
+</ul>
+</body>
+</html>
