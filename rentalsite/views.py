@@ -10,7 +10,8 @@ from django.template.context_processors import request
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
+from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport, \
+    AnnualRentalList, BuyoutCandidates, BuyoutForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from rentalsite.mixin import GroupRequiredMixin
 from django.views.generic import View
@@ -387,12 +388,12 @@ class AnnualDelete(GroupRequiredMixin, DeleteView):
 # Buy-out Candidate Views
 class CandidateList(ListView):
     template_name = 'rentalsite/candidates_list.html'
-    model = BuyoutCandidate
+    model = BuyoutCandidates
     context_object_name = 'candidates_list'
 
 
 class CandidateListDetail(DetailView):
-    model = BuyoutCandidate
+    model = BuyoutCandidates
     template_name = 'rentalsite/candidates_details.html'
     context_object_name = 'candidates_details'
 
