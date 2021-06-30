@@ -1,0 +1,22 @@
+<!-- templates/search_results.html -->
+<!DOCTYPE html>
+<html>
+<style>
+body {
+  background-color: #FAEBD7;
+  opacity: 0.9;
+}
+</style>
+<h1>Search Results</h1>
+<body>
+<ul>
+  {% for object in object_list %}
+    <li>
+        <b>Asset ID:</b> {{ object.assetid }}, <b>Make:</b> {{ object.make }}, <b>Model:</b> {{ object.model }},
+        <b>Serial Number:</b> {{ object.serialnum }}, <b>Vendor Number:</b> {{ object.vendornum }}, <b>Category:</b>
+        {{ object.category }}, <b>Buy/Rent:</b> {{ object.buyrent }}, <b>Returned:</b> {{ object.returned }}
+    </li>
+  {% endfor %}
+</ul>
+</body>
+</html>
