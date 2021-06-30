@@ -1,0 +1,22 @@
+<!-- templates/search_results.html -->
+<!DOCTYPE html>
+<html>
+<style>
+body {
+  background-color: #FAEBD7;
+  opacity: 0.9;
+}
+</style>
+<h1>Search Results</h1>
+<body>
+<ul>
+  {% for object in object_list %}
+    <li>
+        <b>Vendor Number:</b> {{ object.vendornum }}, <b>Name:</b> {{ object.name }},
+        <b>Phone Number:</b> {{ object.phonenum }}, <b>Salesman:</b> {{ object.salesman }},
+        <b>PO Number:</b> {{ object.ponum}}
+    </li>
+  {% endfor %}
+</ul>
+</body>
+</html>

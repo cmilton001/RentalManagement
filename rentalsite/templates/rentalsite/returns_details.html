@@ -69,12 +69,14 @@ th, td {
 </style>
 <body>
 <div class="wrap">
+   <form action="{% url 'rentalsite:returns_search' %}" method="get">
    <div class="search">
-      <input type="text" class="searchTerm" placeholder="Enter Asset ID of Equipment">
+      <input name="q" type="text" class="searchTerm" placeholder="Search">
       <button type="submit" class="searchButton">
         <i style= "font-size:24px" class="fa">&#xf002;</i>
      </button>
    </div>
+    </form>
 </div>
 <table class="center">
   <tr>
