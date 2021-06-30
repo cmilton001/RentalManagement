@@ -66,6 +66,7 @@ urlpatterns = [
          name='weeklyreport_delete'),
     ### Annual Rental List Report URLS ###
     path('annual_search/', views.AnnualSearchView.as_view(), name='annual_search'),
+    path('annual_search/', views.AnnualSearchView.as_view(), name='annual_search'),
     path('annual_details/<int:pk>/annual_list/', views.AnnualList.as_view(), name='annual_list'),
     path('annual_details/<int:pk>/', views.AnnualListDetail.as_view(), name='annual_details'),
     path('annual_create/', views.AnnualCreate.as_view(), name='annual_create'),
