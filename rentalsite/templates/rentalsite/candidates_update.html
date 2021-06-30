@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<h1>Update Potential Buyout Candidate Report</h1>
+<style>
+body {
+  background-color: lightblue;
+  opacity: 0.7;
+}
+</style>
+<body>
+{% block content %}
+    <form method="post">{% csrf_token %}
+        <b>{{ form.as_p }}</b>
+            <button type="submit" value="Save">Save</button>
+        <a href="http://127.0.0.1:8000/rental/listpages/" > Cancel </a>
+    </form>
+{% endblock content %}
+</body>
+</html>

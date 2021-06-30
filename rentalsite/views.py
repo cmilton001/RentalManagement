@@ -1,13 +1,19 @@
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+from django.core.checks import messages
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.template.context_processors import request
+from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-
+from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
+from django.contrib.auth.decorators import login_required, user_passes_test
 from rentalsite.mixin import GroupRequiredMixin
-from rentalsite.models import Equipment, Vendor, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
+from django.views.generic import View
 
 
 # Create your views here.
@@ -125,20 +131,6 @@ class JobListDetail(DetailView):
     context_object_name = 'job_details'
 
 
-class JobSearchView(ListView):
-    model = Job
-    template_name = 'rentalsite/job_search.html'
-    context_object_name = 'job_search'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Job.objects.filter(
-            Q(jobnum__icontains=query) | Q(ordernum__icontains=query) | Q(assetid__icontains=query) |
-            Q(jobdetails__icontains=query) | Q(phase__icontains=query)
-        )
-        return object_list
-
-
 class JobCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Admin']
     model = Job
@@ -175,20 +167,6 @@ class VendorListDetail(DetailView):
     model = Vendor
     template_name = 'rentalsite/vendor_details.html'
     context_object_name = 'vendor_details'
-
-
-class VendorSearchView(ListView):
-    model = Vendor
-    template_name = 'rentalsite/vendor_search.html'
-    context_object_name = 'vendor_search'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Vendor.objects.filter(
-            Q(vendornum__icontains=query) | Q(name__icontains=query) | Q(phonenum__icontains=query) |
-            Q(salesman__icontains=query) | Q(ponum__icontains=query)
-        )
-        return object_list
 
 
 class VendorCreate(GroupRequiredMixin, CreateView):
@@ -229,20 +207,6 @@ class InvoiceListDetail(DetailView):
     context_object_name = 'invoice_details'
 
 
-class InvoiceSearchView(ListView):
-    model = InvoiceDetails
-    template_name = 'rentalsite/invoice_search.html'
-    context_object_name = 'invoice_search'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = InvoiceDetails.objects.filter(
-            Q(invoicenum__icontains=query) | Q(ordernum__icontains=query) | Q(orderdetails__icontains=query) |
-            Q(price__icontains=query)
-        )
-        return object_list
-
-
 class InvoiceCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Admin']
     model = InvoiceDetails
@@ -279,19 +243,6 @@ class ReturnsListDetail(DetailView):
     model = ReturnSlip
     template_name = 'rentalsite/returns_details.html'
     context_object_name = 'returns_details'
-
-
-class ReturnsSearchView(ListView):
-    model = ReturnSlip
-    template_name = 'rentalsite/returns_search.html'
-    context_object_name = 'returns_search'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = ReturnSlip.objects.filter(
-            Q(ordernum__icontains=query) | Q(invoicenum__icontains=query) | Q(returndate__icontains=query)
-        )
-        return object_list
 
 
 class ReturnsCreate(GroupRequiredMixin, CreateView):
@@ -332,21 +283,6 @@ class OrderListDetail(DetailView):
     context_object_name = 'order_details'
 
 
-class OrderSearchView(ListView):
-    model = OrderMaster
-    template_name = 'rentalsite/order_search.html'
-    context_object_name = 'order_search'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = OrderMaster.objects.filter(
-            Q(ordernum__icontains=query) | Q(jobnums__icontains=query) | Q(vendornum__icontains=query) |
-            Q(assetid__icontains=query) | Q(dateplaced__icontains=query) | Q(dateneeded__icontains=query) |
-            Q(dateentered__icontains=query) | Q(expecteddur__icontains=query)
-        )
-        return object_list
-
-
 class OrderCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Admin']
     model = OrderMaster
@@ -383,21 +319,6 @@ class WeeklyReportListDetail(DetailView):
     model = WeeklyReport
     template_name = 'rentalsite/weeklyreport_details.html'
     context_object_name = 'weeklyreport_details'
-
-
-class WeeklyReportSearchView(ListView):
-    model = WeeklyReport
-    template_name = 'rentalsite/weeklyreport_search.html'
-    context_object_name = 'weeklyreport_search'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = WeeklyReport.objects.filter(
-            Q(buyrent__icontains=query) | Q(jobnum__icontains=query) | Q(vendornum__icontains=query) |
-            Q(activejob__icontains=query) | Q(returned__icontains=query) | Q(datereceived__icontains=query) |
-            Q(datereturned__icontains=query) | Q(rentaldatefrom__icontains=query) | Q(rentaldateto__icontains=query)
-        )
-        return object_list
 
 
 class WeeklyReportCreate(GroupRequiredMixin, CreateView):
