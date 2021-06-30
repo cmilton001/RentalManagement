@@ -49,4 +49,4 @@ class OrderMasterForm(forms.ModelForm):
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['category']
+        fields = ('earthmoving', 'aerial access',  'compaction', 'light towers')

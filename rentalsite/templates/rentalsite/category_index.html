@@ -25,11 +25,6 @@ margin-left: auto;
 }
 
 .button {background-color: #008CBA;} /* Blue */
-
-body {
-  background-color: #F0F8FF;
-  opacity: 0.7;
-}
 </style>
 </head>
 <body>
@@ -40,19 +35,21 @@ body {
   top: 10px;
 }
 </style>
-<h1>Categories</h1>
+<h1>Reports</h1>
 
 <div class="wrapper">
 
-<a href=''>
-<button type="submit" class="button button1">Earth Moving</button>
+<a href='http://127.0.0.1:8000/rental/category_create'>
+<button type="submit" class="button button1">Create New</button>
 </a>
-<a href=''>
-    <button class="button button2">Light Towers</button></a>
-<a href=''>
-    <button class="button button2">Aerial Access</button></a>
-    <a href=''>
-        <button class="button button2">Compaction</button></a>
+<a href='http://127.0.0.1:8000/rental/category_update'>
+    <button class="button button2">Update</button></a>
+<a href='http://127.0.0.1:8000/rental/category_update'>
+    <button class="button button2">Delete</button></a>
+    <a href="category_details">
+        <button class="button button2">Details</button></a>
+    <a href="category_list">
+        <button class="button button2">List</button></a>
 </div>
 </body>
 </html>
