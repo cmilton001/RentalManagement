@@ -12,8 +12,9 @@ body {
 <ul>
   {% for object in object_list %}
     <li>
-        <b>Job Number:</b> {{ object.jobnum }}, <b>Vendor Number:</b> {{ object.vendornum }},
-        <b>Rental Asset ID:</b> {{ object.rentalassetid }}
+        <b>Buy/Rent:</b> {{ object.buyrent }}, <b>Job Number:</b> {{ object.jobnum }}, <b>Vendor Number:</b>
+        {{ object.vendornum }}, <b>Returned:</b> {{ object.returned }}, <b>Buy out Price:</b>
+        {{ object.buyoutprice }}, <b>To Date Rentals:</b> {{ object.todaterentals }}
     </li>
   {% endfor %}
 </ul>
