@@ -1,19 +1,13 @@
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from django.core.checks import messages
-from django.core.exceptions import PermissionDenied
+from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
-from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.template.context_processors import request
-from django.urls import reverse, reverse_lazy
-from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from rentalsite.models import Equipment, Vendor, Page, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
-from django.contrib.auth.decorators import login_required, user_passes_test
+
 from rentalsite.mixin import GroupRequiredMixin
-from django.views.generic import View
+from rentalsite.models import Equipment, Vendor, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
 
 
 # Create your views here.
@@ -63,6 +57,10 @@ class ListModules(TemplateView):  # generic view
 
 def reports(request):
     return render(request, 'rentalsite/reports_list.html')
+
+
+def catgories(request):
+    return render(request, 'rentalsite/category_index.html')
 
 
 # Equipment Views

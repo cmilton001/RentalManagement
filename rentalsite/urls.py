@@ -53,6 +53,7 @@ urlpatterns = [
     path('order_details/<int:pk>/order_delete/', views.OrderDelete.as_view(), name='order_delete'),
     ### Reports page ###
     path('reports_list/', views.reports, name='reports_list'),
+    path('category_index/', views.categories, name='category_index'),
     ### Weekly Report URLS ###
     path('weeklyreport_search/', views.WeeklyReportSearchView.as_view(), name='weeklyreport_search'),
     path('weeklyreport_details/<int:pk>/weeklyreport_list/', views.WeeklyReportList.as_view(),
