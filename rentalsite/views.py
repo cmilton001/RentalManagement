@@ -458,3 +458,4 @@ class BuyFormDelete(GroupRequiredMixin, DeleteView):
     context_object_name = 'buyform_delete'
     success_url = reverse_lazy('rentalsite:modules')
 
+
