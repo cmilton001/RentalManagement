@@ -57,5 +57,16 @@ urlpatterns = [
          name='weeklyreport_update'),
     path('weeklyreport_details/<int:pk>/weeklyreport_delete/', views.WeeklyReportDelete.as_view(),
          name='weeklyreport_delete'),
-
+    ### Buyout Candidates Report URLS ###
+    path('candidates_details/<int:pk>/candidates_list/', views.CandidateList.as_view(), name='candidates_list'),
+    path('candidates_details/<int:pk>/', views.CandidateListDetail.as_view(), name='candidates_details'),
+    path('candidates_create/', views.CandidateCreate.as_view(), name='candidates_create'),
+    path('candidates_details/<int:pk>/candidates_update/', views.CandidateUpdate.as_view(), name='candidates_update'),
+    path('candidates_details/<int:pk>/candidates_delete/', views.CandidateDelete.as_view(), name='candidates_delete'),
+    ### Buyout Form List Report URLS ###
+    path('buyform_details/<int:pk>/buyform_list/', views.BuyFormList.as_view(), name='buyform_list'),
+    path('buyform_details/<int:pk>/', views.BuyFormListDetail.as_view(), name='buyform_details'),
+    path('buyform_create/', views.BuyFormCreate.as_view(), name='buyform_create'),
+    path('buyform_details/<int:pk>/buyform_update/', views.BuyFormUpdate.as_view(), name='buyform_update'),
+    path('buyform_details/<int:pk>/buyform_delete/', views.BuyFormDelete.as_view(), name='buyform_delete'),
 ]
