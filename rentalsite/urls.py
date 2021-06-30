@@ -57,6 +57,12 @@ urlpatterns = [
          name='weeklyreport_update'),
     path('weeklyreport_details/<int:pk>/weeklyreport_delete/', views.WeeklyReportDelete.as_view(),
          name='weeklyreport_delete'),
+    ### Annual Rental List Report URLS ###
+    path('annual_details/<int:pk>/annual_list/', views.AnnualList.as_view(), name='annual_list'),
+    path('annual_details/<int:pk>/', views.AnnualListDetail.as_view(), name='annual_details'),
+    path('annual_create/', views.AnnualCreate.as_view(), name='annual_create'),
+    path('annual_details/<int:pk>/annual_update/', views.AnnualUpdate.as_view(), name='annual_update'),
+    path('annual_details/<int:pk>/annual_delete/', views.AnnualDelete.as_view(), name='annual_delete'),
     ### Buyout Candidates Report URLS ###
     path('candidates_details/<int:pk>/candidates_list/', views.CandidateList.as_view(), name='candidates_list'),
     path('candidates_details/<int:pk>/', views.CandidateListDetail.as_view(), name='candidates_details'),
