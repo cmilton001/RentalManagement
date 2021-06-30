@@ -68,7 +68,7 @@ th, td {
 </style>
 <body>
 <div class="wrap">
-    <form action="{% url 'rentalsite:equipment_search' %}" method="get">
+    <form action="{% url 'rentalsite:annual_search' %}" method="get">
    <div class="search">
       <input name="q" type="text" class="searchTerm" placeholder="Search">
       <button type="submit" class="searchButton">
@@ -103,16 +103,16 @@ th, td {
     <td>{{ details.datereturned }}</td>
   </tr>
 </table>
-<a href="delete" >
+<a href="annual_delete" >
     <input type="submit" value="Delete">
     </a>
-<a href="update">
+<a href="annual_update">
     <input type="submit" value="Update">
     </a>
-<a href="http://127.0.0.1:8000/rental/create/">
+<a href="http://127.0.0.1:8000/rental/annual_create/">
     <input type="submit" value="Create New">
     </a>
-<a href="equipment_list">
+<a href="annual_list">
     <input type="submit" value="View List">
     </a>
     </body>
