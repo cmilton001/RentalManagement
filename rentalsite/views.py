@@ -444,6 +444,20 @@ class AnnualListDetail(DetailView):
     context_object_name = 'annual_details'
 
 
+class AnnualSearchView(ListView):
+    model = AnnualRentalList
+    template_name = 'rentalsite/annual_search.html'
+    context_object_name = 'annual_search'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = AnnualRentalList.objects.filter(
+            Q(fromcategory__icontains=query) | Q(tocategory__icontains=query) | Q(make__icontains=query) |
+            Q(summaryordetail__icontains=query) | Q(datereceived__icontains=query) | Q(datereturned__icontains=query)
+        )
+        return object_list
+
+
 class AnnualCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Admin']
     model = AnnualRentalList
@@ -481,6 +495,20 @@ class CandidateListDetail(DetailView):
     context_object_name = 'candidates_details'
 
 
+class CandidateSearchView(ListView):
+    model = BuyoutCandidates
+    template_name = 'rentalsite/candidates_search.html'
+    context_object_name = 'candidates_search'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = BuyoutCandidates.objects.filter(
+            Q(buyrent__icontains=query) | Q(jobnum__icontains=query) | Q(vendornum__icontains=query) |
+            Q(returned__icontains=query) | Q(buyoutprice__icontains=query) | Q(todaterentals__icontains=query)
+        )
+        return object_list
+
+
 class CandidateCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Admin']
     model = BuyoutCandidates
@@ -516,6 +544,19 @@ class BuyFormListDetail(DetailView):
     model = BuyoutForm
     template_name = 'rentalsite/buyform_details.html'
     context_object_name = 'buyform_details'
+
+
+class BuyFormSearchView(ListView):
+    model = BuyoutForm
+    template_name = 'rentalsite/buyform_search.html'
+    context_object_name = 'buyform_search'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = BuyoutForm.objects.filter(
+            Q(jobnum__icontains=query) | Q(vendornum__icontains=query) | Q(rentalassetid__icontains=query)
+        )
+        return object_list
 
 
 class BuyFormCreate(GroupRequiredMixin, CreateView):

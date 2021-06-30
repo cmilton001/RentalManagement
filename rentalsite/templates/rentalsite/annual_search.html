@@ -1,0 +1,22 @@
+<!-- templates/search_results.html -->
+<!DOCTYPE html>
+<html>
+<style>
+body {
+  background-color: #FAEBD7;
+  opacity: 0.9;
+}
+</style>
+<h1>Search Results</h1>
+<body>
+<ul>
+  {% for object in object_list %}
+    <li>
+        <b>From Category:</b> {{ object.fromcategory }}, <b>To Category:</b> {{ object.tocategory }},
+        <b>Make:</b> {{ object.make }}, <b>Summary/Detail:</b> {{ object.summaryordetail }},
+        <b>Date Received:</b> {{ object.datereceived }}, <b>Date Returned:</b> {{ object.datereturned }}
+    </li>
+  {% endfor %}
+</ul>
+</body>
+</html>
