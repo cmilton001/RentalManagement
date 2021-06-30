@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
 from rentalsite.mixin import GroupRequiredMixin
-from rentalsite.models import Equipment, Vendor, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport
+from rentalsite.models import Equipment, Vendor, Job, OrderMaster, InvoiceDetails, ReturnSlip, WeeklyReport, \
+    AnnualRentalList, BuyoutCandidates, BuyoutForm
 
 
 # Create your views here.
@@ -429,3 +430,113 @@ class WeeklyReportDelete(GroupRequiredMixin, DeleteView):
     context_object_name = 'weeklyreport_delete'
     success_url = reverse_lazy('rentalsite:modules')
 
+
+# Annual Rental List Views
+class AnnualList(ListView):
+    template_name = 'rentalsite/annual_list.html'
+    model = AnnualRentalList
+    context_object_name = 'annual_list'
+
+
+class AnnualListDetail(DetailView):
+    model = AnnualRentalList
+    template_name = 'rentalsite/annual_details.html'
+    context_object_name = 'annual_details'
+
+
+class AnnualCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
+    model = AnnualRentalList
+    fields = ['buyrent', 'jobnum', 'vendornum', 'returned', 'buyoutprice', 'todaterentals']
+    template_name = 'rentalsite/annual_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class AnnualUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
+    model = AnnualRentalList
+    fields = ['buyrent', 'jobnum', 'vendornum', 'returned', 'buyoutprice', 'todaterentals']
+    template_name = 'rentalsite/annual_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class AnnualDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
+    template_name = 'rentalsite/annual_delete.html'
+    model = AnnualRentalList
+    context_object_name = 'annual_delete'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+# Buy-out Candidate Views
+class CandidateList(ListView):
+    template_name = 'rentalsite/candidates_list.html'
+    model = BuyoutCandidates
+    context_object_name = 'candidates_list'
+
+
+class CandidateListDetail(DetailView):
+    model = BuyoutCandidates
+    template_name = 'rentalsite/candidates_details.html'
+    context_object_name = 'candidates_details'
+
+
+class CandidateCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
+    model = BuyoutCandidates
+    fields = ['buyrent', 'jobnum', 'vendornum', 'returned', 'buyoutprice', 'todaterentals']
+    template_name = 'rentalsite/candidates_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class CandidateUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
+    model = BuyoutCandidates
+    fields = ['buyrent', 'jobnum', 'vendornum', 'returned', 'buyoutprice', 'todaterentals']
+    template_name = 'rentalsite/candidates_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class CandidateDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
+    template_name = 'rentalsite/candidates_delete.html'
+    model = BuyoutCandidates
+    context_object_name = 'candidates_delete'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+# Buy-out Form Views
+class BuyFormList(ListView):
+    template_name = 'rentalsite/buyform_list.html'
+    model = BuyoutForm
+    context_object_name = 'buyform_list'
+
+
+class BuyFormListDetail(DetailView):
+    model = BuyoutForm
+    template_name = 'rentalsite/buyform_details.html'
+    context_object_name = 'buyform_details'
+
+
+class BuyFormCreate(GroupRequiredMixin, CreateView):
+    group_required = [u'Admin']
+    model = BuyoutForm
+    fields = ['jobnum', 'vendornum', 'rentalassetid']
+    template_name = 'rentalsite/buyform_create.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class BuyFormUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'Admin']
+    model = BuyoutForm
+    fields = ['jobnum', 'vendornum', 'rentalassetid']
+    template_name = 'rentalsite/buyform_update.html'
+    success_url = reverse_lazy('rentalsite:modules')
+
+
+class BuyFormDelete(GroupRequiredMixin, DeleteView):
+    group_required = [u'Admin']
+    template_name = 'rentalsite/buyform_delete.html'
+    model = BuyoutForm
+    context_object_name = 'buyform_delete'
+    success_url = reverse_lazy('rentalsite:modules')
